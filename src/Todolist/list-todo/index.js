@@ -9,7 +9,7 @@ const TodoList = () => {
     const [list, setList] = useState([])
      const dispatch = useDispatch()
      const state = useSelector(state=>state.todo.Lists)
-           console.log(state)
+    
       useEffect(()=>
       {
           dispatch(Todolist())
