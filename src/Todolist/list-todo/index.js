@@ -1,50 +1,60 @@
+
 import React, { useState, useEffect } from 'react'
-import { Card, Table } from 'antd';
+import { Card, Table,  Button, } from 'antd';
+import {  PlusCircleOutlined } from '@ant-design/icons';
+import { useHistory } from "react-router-dom";
 import 'antd/dist/antd.css';
 import {Todolist} from '../../redux/actions'
 import { useSelector, useDispatch } from 'react-redux';
-import AvatarStatus from '../../Avatar/index'
 const TodoList = () => {
-
+    let history = useHistory();
     const [list, setList] = useState([])
      const dispatch = useDispatch()
      const state = useSelector(state=>state.todo.Lists)
-    
       useEffect(()=>
       {
-          dispatch(Todolist())
-      }, [])
+          dispatch(Todolist(state))
+      }, [state])
       
      
     useEffect(() => {
-        setList(state.data)
+        setList(state)
     }, [state])
-           
+         
+
+
+
+    const addCasino = () => {
+        history.push(`/add-todo`)
+    }
+
+    
+
+
+  
 
     const tableColumns = [
         {
-            title: 'First Name',
-            dataIndex: 'first_name',
+            title: 'Name',
+            dataIndex: 'name',
           
-        },
-        {  
-            title: 'Last Name',
-            dataIndex: 'last_name',
-
-        },
-        {
-            title: 'Profile',
-            dataIndex: 'avatar',
-            render: (_, record) => (
-                <div className="d-flex">
-                    <AvatarStatus size={60} type="square" src={record.avatar} />
-                </div>
-            ),
         },
         {
             title: 'Email',
             dataIndex: 'email',
 
+        },
+        {
+            title: 'Phone Number',
+            dataIndex: 'phone',
+        },
+        {
+            title: 'City',
+            dataIndex: 'city',
+        },
+        {
+            title: 'State',
+            dataIndex: 'state',
         },
     ];
 
@@ -57,6 +67,9 @@ const TodoList = () => {
          
             
             <div className="table-responsive">
+            <div  style={{ width:'10%',margin:10}}>
+                    <Button onClick={addCasino} type="primary" icon={<PlusCircleOutlined />} block>Add Todo</Button>
+                </div>
                 <Table
                     columns={tableColumns}
                     dataSource={list}

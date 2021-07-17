@@ -1,13 +1,17 @@
-
 import {
- TODO_LIST
+    TODO_ADD, TODO_LIST
 } from '../constant'
-import { Userlist} from '../service/todo'
 export const Todolist = (data) => async(dispatch) =>
 {
 
-    const user = await Userlist()
    
-    dispatch({ type: TODO_LIST, payload: user})
+   
+    dispatch({ type: TODO_LIST, payload: data})
         
+}
+
+export const Todoadd = (value) => (dispatch) => {
+    dispatch({ type: TODO_ADD, payload: value })
+    
+
 }
